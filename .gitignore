@@ -13,3 +13,6 @@ Cargo.lock
 ## User Added
 # Rust folders
 target/
+
+# Build Objects
+main

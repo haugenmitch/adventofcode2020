@@ -8,7 +8,15 @@ Solutions to the Advent of Code 2020 Challenge in Rust
 
 ### Notes
 
+This is my first (non-trivial) Rust program, and it sure looks like it. I haven't taken the time to go through and read the Rust documentation thoroughly, so this was thrown together with lots of borrowed code from Stack Overflow and the Rust forums.
+
+#### Part 1
+
+It reads in the ints from the file, sorts them, and loops to find if the complement of a number N (2020 - N) exists in the integer vector. If a pair is found, they are printed, as well as their product.
+
 ### Solution, Part 1
+
+`757 x 1263 = 956091`
 
 ### Solution, Part 2
 
