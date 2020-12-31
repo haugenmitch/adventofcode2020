@@ -14,11 +14,17 @@ This is my first (non-trivial) Rust program, and it sure looks like it. I haven'
 
 It reads in the ints from the file, sorts them, and loops to find if the complement of a number N (2020 - N) exists in the integer vector. If a pair is found, they are printed, as well as their product.
 
+#### Part 2
+
+I essentially did the same thing as part 1, except I used a nested for-loop.
+
 ### Solution, Part 1
 
 `757 x 1263 = 956091`
 
 ### Solution, Part 2
+
+`1568 x 211 x 241 = 79734368`
 
 ---
 
