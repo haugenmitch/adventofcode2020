@@ -14,13 +14,7 @@ fn main() -> Result<(), Error> {
             return Ok(());
         }
         Some(s) => match s.parse::<i32>() {
-            Ok(d) => {
-                if d < 1 || d > 25 {
-                    println!("You must enter a value from 1 to 25.");
-                    return Ok(());
-                }
-                day = d;
-            }
+            Ok(d) => day = d,
             Err(_) => {
                 println!("\"{}\" could not be parsed as a number.", s);
                 return Ok(());
@@ -30,38 +24,38 @@ fn main() -> Result<(), Error> {
 
     let filepath = format!("./inputs/{:0>2}.txt", day);
 
-    let mut vec = read(File::open(filepath)?)?;
-    vec.sort();
-
-    let mut n1: i64 = 0;
-    let mut n2: i64 = 0;
-
-    for i in &vec {
-        if vec.contains(&(2020 - i)) {
-            n1 = *i;
-            n2 = 2020 - i;
-            break;
-        }
-    }
-
-    println!("{} x {} = {}", n1, n2, n1 * n2);
-
-    let mut n3: i64 = 0;
-    let mut n4: i64 = 0;
-    let mut n5: i64 = 0;
-
-    for j in &vec {
-        for k in &vec {
-            if vec.contains(&(2020 - j - k)) {
-                n3 = *j;
-                n4 = *k;
-                n5 = 2020 - j - k;
-                break;
+    match day {
+        1 => {
+            let mut vec = read(File::open(filepath)?)?;
+            vec.sort();
+            let mut n1: i64 = 0;
+            let mut n2: i64 = 0;
+            for i in &vec {
+                if vec.contains(&(2020 - i)) {
+                    n1 = *i;
+                    n2 = 2020 - i;
+                    break;
+                }
             }
+            println!("{} x {} = {}", n1, n2, n1 * n2);
+            let mut n3: i64 = 0;
+            let mut n4: i64 = 0;
+            let mut n5: i64 = 0;
+            for j in &vec {
+                for k in &vec {
+                    if vec.contains(&(2020 - j - k)) {
+                        n3 = *j;
+                        n4 = *k;
+                        n5 = 2020 - j - k;
+                        break;
+                    }
+                }
+            }
+            println!("{} x {} x {} = {}", n3, n4, n5, n3 * n4 * n5);
         }
+        2..=25 => println!("Not implemented yet"),
+        _ => println!("You must enter a value from 1 to 25."),
     }
-
-    println!("{} x {} x {} = {}", n3, n4, n5, n3 * n4 * n5);
 
     Ok(())
 }
