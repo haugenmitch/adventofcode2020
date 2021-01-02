@@ -1,7 +1,8 @@
 extern crate clap;
 use clap::{App, Arg};
 use std::fs::File;
-use std::io::{BufRead, BufReader, Error, ErrorKind, Read};
+use std::io::{self, BufRead, Error, ErrorKind};
+use std::path::Path;
 
 fn main() -> Result<(), Error> {
     let matches = parse_args();
@@ -23,10 +24,26 @@ fn main() -> Result<(), Error> {
     }
 
     let filepath = format!("./inputs/{:0>2}.txt", day);
+    let lines;
+    match read_lines(&filepath) {
+        Ok(l) => lines = l,
+        Err(_) => {
+            println!("Could not read file: {}", filepath);
+            return Ok(());
+        }
+    }
 
     match day {
         1 => {
-            let mut vec = read(File::open(filepath)?)?;
+            let mut vec: Vec<i64> = vec![];
+            for line in lines {
+                vec.push(
+                    line?
+                        .trim()
+                        .parse()
+                        .map_err(|e| Error::new(ErrorKind::InvalidData, e))?,
+                );
+            }
             vec.sort();
             let mut n1: i64 = 0;
             let mut n2: i64 = 0;
@@ -84,16 +101,10 @@ fn parse_args() -> clap::ArgMatches<'static> {
     return matches;
 }
 
-fn read<R: Read>(io: R) -> Result<Vec<i64>, Error> {
-    let br = BufReader::new(io);
-    let mut v = vec![];
-    for line in br.lines() {
-        v.push(
-            line?
-                .trim()
-                .parse()
-                .map_err(|e| Error::new(ErrorKind::InvalidData, e))?,
-        );
-    }
-    Ok(v)
+fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
+where
+    P: AsRef<Path>,
+{
+    let file = File::open(filename)?;
+    Ok(io::BufReader::new(file).lines())
 }
