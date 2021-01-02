@@ -4,9 +4,33 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Error, ErrorKind, Read};
 
 fn main() -> Result<(), Error> {
-    let _d = parse_args();
+    let matches = parse_args();
 
-    let mut vec = read(File::open("./inputs/01.txt")?)?;
+    let day_string = matches.value_of("day");
+    let day;
+    match day_string {
+        None => {
+            println!("A day must be provided.");
+            return Ok(());
+        }
+        Some(s) => match s.parse::<i32>() {
+            Ok(d) => {
+                if d < 1 || d > 25 {
+                    println!("You must enter a value from 1 to 25.");
+                    return Ok(());
+                }
+                day = d;
+            }
+            Err(_) => {
+                println!("\"{}\" could not be parsed as a number.", s);
+                return Ok(());
+            }
+        },
+    }
+
+    let filepath = format!("./inputs/{:0>2}.txt", day);
+
+    let mut vec = read(File::open(filepath)?)?;
     vec.sort();
 
     let mut n1: i64 = 0;
