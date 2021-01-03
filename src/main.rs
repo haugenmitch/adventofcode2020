@@ -36,14 +36,14 @@ fn main() -> Result<(), Error> {
             }
         },
     }
-    println!("{}", part);
 
     let filepath = format!("./inputs/{:0>2}.txt", day);
     let lines = read_lines(filepath);
 
     match day {
         1 => days::day01::run(lines),
-        2..=25 => println!("Not implemented yet"),
+        2 => days::day02::run(part, lines),
+        3..=25 => println!("Not implemented yet"),
         _ => println!("You must enter a -day value from 1 to 25."),
     }
 
