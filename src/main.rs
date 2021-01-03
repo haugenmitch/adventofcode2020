@@ -25,15 +25,26 @@ fn main() -> Result<(), Error> {
         },
     }
 
+    let part;
+    match matches.value_of("part") {
+        None => part = 0,
+        Some(s) => match s.parse::<i32>() {
+            Ok(p) => part = p,
+            Err(_) => {
+                println!("Part must be given as an integer.");
+                return Ok(());
+            }
+        },
+    }
+    println!("{}", part);
+
     let filepath = format!("./inputs/{:0>2}.txt", day);
     let lines = read_lines(filepath);
 
     match day {
-        1 => {
-            days::day01::run(lines);
-        }
+        1 => days::day01::run(lines),
         2..=25 => println!("Not implemented yet"),
-        _ => println!("You must enter a value from 1 to 25."),
+        _ => println!("You must enter a -day value from 1 to 25."),
     }
 
     Ok(())
