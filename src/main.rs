@@ -1,8 +1,10 @@
 extern crate clap;
 use clap::{App, Arg};
 use std::fs::File;
-use std::io::{self, BufRead, Error, ErrorKind};
+use std::io::{BufRead, BufReader, Error};
 use std::path::Path;
+
+mod days;
 
 fn main() -> Result<(), Error> {
     let matches = parse_args();
@@ -24,51 +26,11 @@ fn main() -> Result<(), Error> {
     }
 
     let filepath = format!("./inputs/{:0>2}.txt", day);
-    let lines;
-    match read_lines(&filepath) {
-        Ok(l) => lines = l,
-        Err(_) => {
-            println!("Could not read file: {}", filepath);
-            return Ok(());
-        }
-    }
+    let lines = read_lines(filepath);
 
     match day {
         1 => {
-            let mut vec: Vec<i64> = vec![];
-            for line in lines {
-                vec.push(
-                    line?
-                        .trim()
-                        .parse()
-                        .map_err(|e| Error::new(ErrorKind::InvalidData, e))?,
-                );
-            }
-            vec.sort();
-            let mut n1: i64 = 0;
-            let mut n2: i64 = 0;
-            for i in &vec {
-                if vec.contains(&(2020 - i)) {
-                    n1 = *i;
-                    n2 = 2020 - i;
-                    break;
-                }
-            }
-            println!("{} x {} = {}", n1, n2, n1 * n2);
-            let mut n3: i64 = 0;
-            let mut n4: i64 = 0;
-            let mut n5: i64 = 0;
-            for j in &vec {
-                for k in &vec {
-                    if vec.contains(&(2020 - j - k)) {
-                        n3 = *j;
-                        n4 = *k;
-                        n5 = 2020 - j - k;
-                        break;
-                    }
-                }
-            }
-            println!("{} x {} x {} = {}", n3, n4, n5, n3 * n4 * n5);
+            days::day01::run(lines);
         }
         2..=25 => println!("Not implemented yet"),
         _ => println!("You must enter a value from 1 to 25."),
@@ -101,10 +63,11 @@ fn parse_args() -> clap::ArgMatches<'static> {
     return matches;
 }
 
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
+// TODO Add error checking
+fn read_lines(filename: impl AsRef<Path>) -> Vec<String> {
+    let file = File::open(filename).expect("no such file");
+    let buf = BufReader::new(file);
+    buf.lines()
+        .map(|l| l.expect("Could not parse line"))
+        .collect()
 }
