@@ -48,7 +48,11 @@ I did a lot of cleanup of the program. Last year, I made individual Python progr
 
 ### Notes
 
+The first part was a simple character check, increasing the index by 3 mod 31 every line.
+
 ### Solution, Part 1
+
+`286`
 
 ### Solution, Part 2
 
