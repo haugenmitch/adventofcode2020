@@ -32,9 +32,15 @@ I essentially did the same thing as part 1, except I used a nested for-loop.
 
 ### Notes
 
+I did a lot of cleanup of the program. Last year, I made individual Python programs/scripts for every day of the challenge. This year I'd like to go for a bit cleaner of a solution that allows for a little more code reuse. With that in mind, I added a system for selecting the day and part of the challenge with command line arguments. Each new day will be done in a separate module. The challenge for day 2 wasn't very hard. It was more about learning the basics of Rust. I'm getting there, but it definitely has a steep learning curve and likes to throw your errors at you. It's quite different from 2019's Python solutions.
+
 ### Solution, Part 1
 
+`564`
+
 ### Solution, Part 2
+
+`325`
 
 ---
 
@@ -42,11 +48,7 @@ I essentially did the same thing as part 1, except I used a nested for-loop.
 
 ### Notes
 
-I did a lot of cleanup of the program. Last year, I made individual Python programs/scripts for every day of the challenge. This year I'd like to go for a bit cleaner of a solution that allows for a little more code reuse. With that in mind, I added a system for selecting the day and part of the challenge with command line arguments. Each new day will be done in a separate module. The challenge for day 2 wasn't very hard. It was more about learning the basics of Rust. I'm getting there, but it definitely has a steep learning curve and likes to throw your errors at you. It's quite different from 2019's Python solutions.
-
 ### Solution, Part 1
-
-`564`
 
 ### Solution, Part 2
 
