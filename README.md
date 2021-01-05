@@ -66,7 +66,11 @@ All-in-all, this was a pretty easy challenge day. I did it without anything more
 
 ### Notes
 
+This challenge was good practice for parsing and using Options.
+
 ### Solution, Part 1
+
+`222`
 
 ### Solution, Part 2
 
