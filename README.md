@@ -48,13 +48,17 @@ I did a lot of cleanup of the program. Last year, I made individual Python progr
 
 ### Notes
 
-The first part was a simple character check, increasing the index by 3 mod 31 every line.
+The first part was a simple character check, increasing the index by 3 mod 31 every line. The second part was essentially the same as the first, but just adding some functionality to make it a little more generic.
+
+All-in-all, this was a pretty easy challenge day. I did it without anything more than a few small errors and I didn't need to look anything up, either. I'm getting more comfortable with Rust.
 
 ### Solution, Part 1
 
 `286`
 
 ### Solution, Part 2
+
+`3638606400`
 
 ---
 
