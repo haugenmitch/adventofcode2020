@@ -66,13 +66,15 @@ All-in-all, this was a pretty easy challenge day. I did it without anything more
 
 ### Notes
 
-This challenge was good practice for parsing and using Options.
+This challenge was good practice for parsing and using Options. The `parse_passports()` function is large and could use refactoring, but I will save that work until later so that I can focus on getting through the rest of the days of the challenge. I'm sure I could make the passport checking code for part 2 more compact, but I decided to write it using the knowledge of Rust I have at hand.
 
 ### Solution, Part 1
 
 `222`
 
 ### Solution, Part 2
+
+`140`
 
 ---
 

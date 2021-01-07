@@ -1,12 +1,12 @@
 struct Passport {
-    birth_year: Option<String>,
-    issue_year: Option<String>,
-    exp_year: Option<String>,
-    height: Option<String>,
-    hair_color: Option<String>,
-    eye_color: Option<String>,
-    passport_id: Option<String>,
-    country_id: Option<String>,
+    byr: Option<String>,
+    iyr: Option<String>,
+    eyr: Option<String>,
+    hgt: Option<String>,
+    hcl: Option<String>,
+    ecl: Option<String>,
+    pid: Option<String>,
+    cid: Option<String>,
     valid: bool,
 }
 
@@ -34,7 +34,23 @@ fn part1(passports: &Vec<Passport>) {
     println!("{}", count);
 }
 
-fn part2(_passports: &Vec<Passport>) {}
+fn part2(passports: &Vec<Passport>) {
+    let mut count = 0;
+    for p in passports {
+        if check_byr(&p.byr)
+            && check_iyr(&p.iyr)
+            && check_eyr(&p.eyr)
+            && check_hgt(&p.hgt)
+            && check_hcl(&p.hcl)
+            && check_ecl(&p.ecl)
+            && check_pid(&p.pid)
+        {
+            count += 1
+        };
+    }
+
+    println!("{}", count);
+}
 
 fn parse_passports(lines: &Vec<String>) -> Vec<Passport> {
     let mut passports: Vec<Passport> = vec![];
@@ -57,14 +73,14 @@ fn parse_passports(lines: &Vec<String>) -> Vec<Passport> {
         };
 
         let mut p = Passport {
-            birth_year: None,
-            issue_year: None,
-            exp_year: None,
-            height: None,
-            hair_color: None,
-            eye_color: None,
-            passport_id: None,
-            country_id: None,
+            byr: None,
+            iyr: None,
+            eyr: None,
+            hgt: None,
+            hcl: None,
+            ecl: None,
+            pid: None,
+            cid: None,
             valid: false,
         };
 
@@ -76,28 +92,28 @@ fn parse_passports(lines: &Vec<String>) -> Vec<Passport> {
                 let key = key_and_value[0];
                 match key {
                     "byr" => {
-                        p.birth_year = Some(key_and_value[1].to_string());
+                        p.byr = Some(key_and_value[1].to_string());
                     }
                     "iyr" => {
-                        p.issue_year = Some(key_and_value[1].to_string());
+                        p.iyr = Some(key_and_value[1].to_string());
                     }
                     "eyr" => {
-                        p.exp_year = Some(key_and_value[1].to_string());
+                        p.eyr = Some(key_and_value[1].to_string());
                     }
                     "hgt" => {
-                        p.height = Some(key_and_value[1].to_string());
+                        p.hgt = Some(key_and_value[1].to_string());
                     }
                     "hcl" => {
-                        p.hair_color = Some(key_and_value[1].to_string());
+                        p.hcl = Some(key_and_value[1].to_string());
                     }
                     "ecl" => {
-                        p.eye_color = Some(key_and_value[1].to_string());
+                        p.ecl = Some(key_and_value[1].to_string());
                     }
                     "pid" => {
-                        p.passport_id = Some(key_and_value[1].to_string());
+                        p.pid = Some(key_and_value[1].to_string());
                     }
                     "cid" => {
-                        p.country_id = Some(key_and_value[1].to_string());
+                        p.cid = Some(key_and_value[1].to_string());
                     }
                     _ => {}
                 }
@@ -110,13 +126,13 @@ fn parse_passports(lines: &Vec<String>) -> Vec<Passport> {
             line = lines.get(i).unwrap();
         }
 
-        if p.birth_year != None
-            && p.exp_year != None
-            && p.eye_color != None
-            && p.hair_color != None
-            && p.height != None
-            && p.issue_year != None
-            && p.passport_id != None
+        if p.byr != None
+            && p.eyr != None
+            && p.ecl != None
+            && p.hcl != None
+            && p.hgt != None
+            && p.iyr != None
+            && p.pid != None
         {
             p.valid = true
         };
@@ -124,4 +140,127 @@ fn parse_passports(lines: &Vec<String>) -> Vec<Passport> {
     }
 
     return passports;
+}
+
+fn check_byr(s: &Option<String>) -> bool {
+    match s {
+        None => return false,
+        Some(val) => match val.parse::<i32>() {
+            Ok(n) => {
+                if 1920 <= n && n <= 2002 {
+                    return true;
+                };
+            }
+            Err(_) => return false,
+        },
+    }
+    return false;
+}
+
+fn check_iyr(s: &Option<String>) -> bool {
+    match s {
+        None => return false,
+        Some(val) => match val.parse::<i32>() {
+            Ok(n) => {
+                if 2010 <= n && n <= 2020 {
+                    return true;
+                };
+            }
+            Err(_) => return false,
+        },
+    }
+    return false;
+}
+
+fn check_eyr(s: &Option<String>) -> bool {
+    match s {
+        None => return false,
+        Some(val) => match val.parse::<i32>() {
+            Ok(n) => {
+                if 2020 <= n && n <= 2030 {
+                    return true;
+                };
+            }
+            Err(_) => return false,
+        },
+    }
+    return false;
+}
+
+fn check_hgt(s: &Option<String>) -> bool {
+    match s {
+        None => return false,
+        Some(val) => {
+            if val.ends_with("cm") {
+                match val[..(val.len() - 2)].parse::<i32>() {
+                    Ok(n) => {
+                        if 150 <= n && n <= 193 {
+                            return true;
+                        }
+                    }
+                    Err(_) => return false,
+                }
+            } else if val.ends_with("in") {
+                match val[..(val.len() - 2)].parse::<i32>() {
+                    Ok(n) => {
+                        if 59 <= n && n <= 76 {
+                            return true;
+                        }
+                    }
+                    Err(_) => return false,
+                }
+                return false;
+            }
+        }
+    }
+    return false;
+}
+
+fn check_hcl(s: &Option<String>) -> bool {
+    match s {
+        None => return false,
+        Some(val) => {
+            if val.len() == 7
+                && val.starts_with("#")
+                && val[1..7].chars().all(|x| x.is_ascii_hexdigit())
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+fn check_ecl(s: &Option<String>) -> bool {
+    match s {
+        None => return false,
+        Some(val) => {
+            if val == "amb"
+                || val == "blu"
+                || val == "brn"
+                || val == "gry"
+                || val == "grn"
+                || val == "hzl"
+                || val == "oth"
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+fn check_pid(s: &Option<String>) -> bool {
+    match s {
+        None => return false,
+        Some(val) => {
+            if val.len() == 9 {
+                match val.parse::<i32>() {
+                    Ok(_) => return true,
+                    Err(_) => return false,
+                }
+            }
+        }
+    }
+    return false;
 }
