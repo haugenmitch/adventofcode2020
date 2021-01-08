@@ -3,10 +3,10 @@ pub fn run(part: i32, lines: Vec<String>) {
 
     match part {
         1 => part1(&ids),
-        // 2 => part2(&ids),
+        2 => part2(&ids),
         _ => {
             part1(&ids);
-            // part2(&ids);
+            part2(&ids);
         }
     }
 }
@@ -30,4 +30,13 @@ fn parse_seats(lines: &Vec<String>) -> Vec<i32> {
 
 fn part1(ids: &Vec<i32>) {
     println!("{}", ids.last().unwrap());
+}
+
+fn part2(ids: &Vec<i32>) {
+    for i in 1..ids.len() {
+        if (ids.get(i - 1).unwrap() + 1) != *ids.get(i).unwrap() {
+            println!("{}", ids.get(i - 1).unwrap() + 1);
+            break;
+        }
+    }
 }

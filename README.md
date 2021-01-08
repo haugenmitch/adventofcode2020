@@ -90,6 +90,8 @@ The conceit of this challenge is that the seat descriptions are essentially just
 
 ### Solution, Part 2
 
+`659`
+
 ---
 
 ## Day 06
