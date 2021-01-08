@@ -82,7 +82,11 @@ This challenge was good practice for parsing and using Options. The `parse_passp
 
 ### Notes
 
+The conceit of this challenge is that the seat descriptions are essentially just binary. 'B' and 'R' translate to 1 and 'F' and 'L' translate to 0. From there it's a simple matter of translating the strings to ints and finding the desired values.
+
 ### Solution, Part 1
+
+`896`
 
 ### Solution, Part 2
 
