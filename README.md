@@ -98,13 +98,15 @@ The conceit of this challenge is that the seat descriptions are essentially just
 
 ### Notes
 
-This is a simple matter of parsing characters and processing them in groups.
+This is a simple matter of parsing characters and processing them in groups. By translating them to set bits in an int, the groups can be processed differently for both groups. After the parsing, it's a simple matter of bitwise logic and counting bits.
 
 ### Solution, Part 1
 
 `6416`
 
 ### Solution, Part 2
+
+`3050`
 
 ---
 
