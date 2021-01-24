@@ -114,9 +114,15 @@ This is a simple matter of parsing characters and processing them in groups. By 
 
 ### Notes
 
+I was really struggling with this one at first. I was tyring to avoid recursion for no reason in particular. But after bashing my head against a wall for a while I came to my senses and realized the recursive solution was so much easier.
+
 ### Solution, Part 1
 
+`238`
+
 ### Solution, Part 2
+
+`82930`
 
 ---
 
