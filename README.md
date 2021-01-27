@@ -130,7 +130,11 @@ I was really struggling with this one at first. I was tyring to avoid recursion 
 
 ### Notes
 
+Part 1 took a while, but it was largely due to typos and running into a few new syntactic rules with Rust.
+
 ### Solution, Part 1
+
+`1949`
 
 ### Solution, Part 2
 
