@@ -11,6 +11,12 @@ struct Command {
     val: i64,
 }
 
+#[derive(Debug)]
+struct Step {
+    line: i64,
+    val: i64,
+}
+
 pub fn run(part: i32, lines: Vec<String>) {
     let commands = parse_commands(&lines);
 
@@ -49,6 +55,8 @@ fn part1(commands: &Vec<Command>) {
     let mut inst_exec: Vec<bool> = vec![false; commands.len()];
 
     loop {
+        inst_exec[pc] = true;
+
         match commands[pc].inst {
             Instruction::Acc => {
                 acc += commands[pc].val;
@@ -61,10 +69,76 @@ fn part1(commands: &Vec<Command>) {
         if inst_exec[pc] == true {
             break;
         }
-        inst_exec[pc] = true;
     }
 
     println!("{}", acc);
 }
 
-fn part2(_commands: &Vec<Command>) {}
+fn part2(commands: &Vec<Command>) {
+    let mut acc: i64 = 0;
+    let mut pc: usize = 0;
+    let mut inst_exec: Vec<bool> = vec![false; commands.len()];
+    let mut swapped: bool = false;
+    let mut swap_acc: i64 = 0;
+    let mut swap_pc: usize = 0;
+    let mut swap_inst_exec: Vec<bool> = vec![];
+
+    loop {
+        inst_exec[pc] = true;
+
+        match commands[pc].inst {
+            Instruction::Acc => {
+                acc += commands[pc].val;
+                pc += 1
+            }
+            Instruction::Jmp => {
+                if swapped {
+                    pc = (pc as i64 + commands[pc].val) as usize;
+                } else {
+                    swapped = true;
+                    swap_pc = pc;
+                    swap_acc = acc;
+                    swap_inst_exec = inst_exec.clone();
+                    pc += 1;
+                }
+            }
+            Instruction::Nop => {
+                if swapped {
+                    pc += 1
+                } else {
+                    swapped = true;
+                    swap_pc = pc;
+                    swap_acc = acc;
+                    swap_inst_exec = inst_exec.clone();
+                    pc = (pc as i64 + commands[pc].val) as usize;
+                }
+            }
+        };
+
+        if pc == commands.len() {
+            break;
+        };
+
+        if inst_exec[pc] == true {
+            swapped = false;
+            pc = swap_pc;
+            acc = swap_acc;
+            inst_exec = swap_inst_exec.clone();
+
+            match commands[pc].inst {
+                Instruction::Acc => {
+                    acc += commands[pc].val;
+                    pc += 1
+                }
+                Instruction::Jmp => pc = (pc as i64 + commands[pc].val) as usize,
+                Instruction::Nop => pc += 1,
+            };
+        }
+
+        if pc == commands.len() {
+            break;
+        };
+    }
+
+    println!("{}", acc);
+}

@@ -130,13 +130,15 @@ I was really struggling with this one at first. I was tyring to avoid recursion 
 
 ### Notes
 
-Part 1 took a while, but it was largely due to typos and running into a few new syntactic rules with Rust.
+Part 1 took a while, but it was largely due to typos and running into a few new syntactic rules with Rust. Part 2 was largely similar to part 1. I essentially bookmark the state of the program and registers at the instant of the swap. If the swap doesn't cause the program to terminate properly, I go back and perform the swap later. I keep doing this until the proper swap is found.
 
 ### Solution, Part 1
 
 `1949`
 
 ### Solution, Part 2
+
+`2092`
 
 ---
 
