@@ -50,7 +50,8 @@ fn main() -> Result<(), Error> {
         7 => days::day07::run(part, lines),
         8 => days::day08::run(part, lines),
         9 => days::day09::run(part, lines),
-        10..=25 => println!("Not implemented yet"),
+        10 => days::day10::run(part, lines),
+        11..=25 => println!("Not implemented yet"),
         _ => println!("You must enter a -day value from 1 to 25."),
     }
 

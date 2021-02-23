@@ -162,7 +162,11 @@ These were both pretty simple. It was essentially just a matter of keeping a run
 
 ### Notes
 
+Part 1 was simply a matter of sorting the vector and counting the differences.
+
 ### Solution, Part 1
+
+`2080`
 
 ### Solution, Part 2
 
