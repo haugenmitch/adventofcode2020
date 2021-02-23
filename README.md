@@ -146,9 +146,15 @@ Part 1 took a while, but it was largely due to typos and running into a few new 
 
 ### Notes
 
+These were both pretty simple. It was essentially just a matter of keeping a running buffer which was variable in size in the second case.
+
 ### Solution, Part 1
 
+`731031916`
+
 ### Solution, Part 2
+
+`93396727`
 
 ---
 
