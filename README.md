@@ -162,13 +162,15 @@ These were both pretty simple. It was essentially just a matter of keeping a run
 
 ### Notes
 
-Part 1 was simply a matter of sorting the vector and counting the differences.
+Part 1 was simply a matter of sorting the vector and counting the differences. The trick to part 2 was realizing that the number of ways to get to a certain number was the sum of the number of ways to get to the "accessible" numbers below it. Successively generate these values all the way up and you get the answer in O(n) time, despite the fact that there are trillions of permutations.
 
 ### Solution, Part 1
 
 `2080`
 
 ### Solution, Part 2
+
+`6908379398144`
 
 ---
 
